@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Hello Leaflet</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+     crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+     crossorigin=""></script>  
+
+</head>
+
+<body>
+
+    <div id="map" style="width: 600px; height: 400px;"></div>
+ <script>
+
+        const map = L.map('map').setView([41.497521, //latitude
+        -81.693649], //longitude
+            15);    //zoom
+
+        var marker = L.marker([41.497521, -81.693649]).addTo(map);
+
+        var circle = L.circle([41.48, -81.68], {radius: 600}).addTo(map);
+
+        var latlngs = [[41.49, -81.67], [41.48, -81.66], [41.51, -81.65]];
+
+      var polygon = L.polygon(latlngs, {color: 'orange'}, {fillOpacity: '0.8'}, {weight: '6'}).addTo(map);
+
+      var popup = L.popup()
+           .setLatLng([41.4975, -81.61])
+           .setContent("Testing a popup.")
+           .openOn(map);
+
+      marker.bindPopup("Testing a popup.").openPopup();
+circle.bindPopup("<b>Testing!</b>I am a circle.");
+polygon.bindPopup("Testing a polygon."); 
+
+     function onMapClick(e) {
+        alert("You clicked the map at " + e.latlng);
+}
+
+map.on('click', onMapClick);
+
+        const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+        var marker = L.marker([43.096214, -79.037743]).addTo(map);
+
+        var circle = L.circle([43.08, -79.08], {radius: 600}).addTo(map);
+
+
+</script>   
+    
+
+</body>
+
+</html>
